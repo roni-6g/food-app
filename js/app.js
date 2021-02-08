@@ -8,7 +8,8 @@ const searchFood = () => {
 }
 
 const showFoods = (foods) => {
-    const foodSection = document.getElementById("food-container")
+    const foodSection = document.getElementById("food-container");
+    foodSection.innerHTML = '';
     foods.forEach(food => {
         const foodDiv = document.createElement("div");
         foodDiv.className = "food-item col-4 food-content";
@@ -31,6 +32,7 @@ const showDetails = (foodDetails) => {
 
 const displayFoodInfo = foodsInfo => {
     const infoSection = document.getElementById('food-details');
+    infoSection.innerHTML = '';
     const detailsInfoDiv = document.createElement("div");
     detailsInfoDiv.className = "show-details";
     const foodDetailsInfo = `
