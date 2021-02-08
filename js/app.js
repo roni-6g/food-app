@@ -1,63 +1,48 @@
-function searchFood() {
-    const foodName = document.getElementById('input-food').value;
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodName}`)
+const searchFood = () => {
+    const searchFood = document.getElementById('search-food').value;
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchFood}`;
+    //Load data form search api
+    fetch(url)
         .then(response => response.json())
-        .then(data => showFood(data)) //console.log(data.meals))    
+        .then(data => showFoods(data.meals))
 }
 
-const foodGalllery = document.getElementById('food-bank');
-function showFood(foodList) {
-    const foodItem = foodList.meals;
-    foodItem.forEach(food => {
-        const foodImg = food.strMealThumb;
-        const foodName = food.strMeal;
-        const foodResult = `
-             <div class="gallery-box" onclick="foodDetails()">
-                 <img class="food-img" src="${foodImg}">
-                 <h5 class="food-name"> ${foodName} </h5>
-                 <button> See More </button>
-             </div>
-         `;
-        const div = document.createElement('div');
-        div.innerHTML = foodResult;
-        foodGalllery.appendChild(div);
+const showFoods = (foods) => {
+    const foodSection = document.getElementById("food-container")
+    foods.forEach(food => {
+        const foodDiv = document.createElement("div");
+        foodDiv.className = "food-item col-4 food-content";
+        const foodInfo = `
+            <img src="${food.strMealThumb}">
+            <h4> ${food.strMeal} </h4>
+            <button onClick="showDetails('${food.idMeal}')" class="btn btn-primary"> See More </button>
+        `;
+        foodDiv.innerHTML = foodInfo;
+        foodSection.appendChild(foodDiv)
     });
 }
 
-//Showing Food Details Informations
-function foodDetails() {
-    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772`)
-        .then(response => response.json())
-        .then(data => showFoodInfo(data))
-       
+const showDetails = (foodDetails) => {
+    const detailsUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${foodDetails}`
+    fetch(detailsUrl)
+    .then(response => response.json())
+    .then(data => displayFoodInfo(data.meals[0]))
 }
 
-const foodInfoContainer = document.getElementById('food-details');
-
-function showFoodInfo(foodItem) {
-    const foodInfo = foodItem.meals[0];
-    const foodImg = foodInfo.strMealThumb;
-    const foodTitle = foodInfo.strMeal;
-    const foodIt = foodInfo.idMeal;
-    const foodArea = foodInfo.strArea;
-    const foodInstractions = foodInfo.strInstructions;
-    // console.log(foodInstractions);
-    const showFoodInstractions = `
-    <div class="details-info"> 
-        <img src="${foodImg}">
-        <h3> Food Name: ${foodTitle} </h3>
-        <h4> Food ID: ${foodIt} </h4>
-        <h5> Avaialble In: ${foodArea} </h5>
-        <p>
-            <b> Instractions: </b>
-            ${foodInstractions}
-        </p>
-    </div>
-`;
-    const foodDetailsDiv = document.createElement('div');
-    foodDetailsDiv.innerHTML = showFoodInstractions;
-    foodInfoContainer.appendChild(foodDetailsDiv);
-
+const displayFoodInfo = foodsInfo => {
+    const infoSection = document.getElementById('food-details');
+    const detailsInfoDiv = document.createElement("div");
+    detailsInfoDiv.className = "show-details";
+    const foodDetailsInfo = `
+        <img src="${foodsInfo.strMealThumb}">
+        <h3> <b> Name:</b> ${foodsInfo.strMeal} </h3>
+        <h4> <b> ID: </b> ${foodsInfo.idMeal} </h4>
+        <h5> <b> Ingredient:</b> ${foodsInfo.strIngredient1} </h5>
+        <h5> ${foodsInfo.strIngredient2} </h5>
+        <h5> ${foodsInfo.strIngredient3} </h5>
+        <h5> ${foodsInfo.strIngredient4} </h5>
+        <h5> ${foodsInfo.strIngredient5} </h5>
+    `;
+    detailsInfoDiv.innerHTML = foodDetailsInfo;
+    infoSection.appendChild(detailsInfoDiv);
 }
-
-

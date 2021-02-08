@@ -11,15 +11,27 @@
 </head>
 
 <body>
-    <section class="my-shop">
-        <div class="btn-group mb-5 col-6">
-            <input id="input-food" class="form-control" type="text" placeholder="Search For A Recipe">
-            <input onclick="searchFood()" class="btn btn-primary" type="submit">
+    <!-- Food Search Bar -->
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-3"></div>
+            <div class="col-6 search-bar">
+                <div class="input-group search-bar">
+                    <input id="search-food" class="form-control" type="text" placeholder="Search Food Item">
+                    <button onclick="searchFood()" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+            <div class="col-3"></div>
         </div>
-    </section>
-    <section id="food-details"></section>
-
-    <div id="food-bank">
+    </div>
+    <!-- Display Food Details  -->
+    <div id="food-details" class="container">
+    </div>
+    
+    <!-- Display Food Result  -->
+    <div class="container">
+        <div id="food-container" class="row mt-5">            
+        </div>
     </div>
 
 
