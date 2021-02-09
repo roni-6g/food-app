@@ -5,6 +5,7 @@ const searchFood = () => {
     fetch(url)
         .then(response => response.json())
         .then(data => showFoods(data.meals))
+        .catch(error => errorResult('We are sorry... This item is not found try again with another name!'));
 }
 
 const showFoods = (foods) => {
@@ -48,3 +49,15 @@ const displayFoodInfo = foodsInfo => {
     detailsInfoDiv.innerHTML = foodDetailsInfo;
     infoSection.appendChild(detailsInfoDiv);
 }
+
+const errorResult = (error) => {
+    const displayError = document.getElementById('error-text');
+    const errorInfo = `
+    <div class="alert alert-danger">
+        <b>${error}</b>
+    </div>
+    `;
+    displayError.innerHTML = errorInfo;
+       
+}
+
