@@ -11,6 +11,7 @@ const searchFood = () => {
 const showFoods = (foods) => {
     const foodSection = document.getElementById("food-container");
     foodSection.innerHTML = '';
+    document.getElementById('food-details').innerHTML = '';
     document.getElementById('error-text').innerHTML = '';
     foods.forEach(food => {
         const foodDiv = document.createElement("div");
@@ -35,6 +36,7 @@ const showDetails = (foodDetails) => {
 const displayFoodInfo = foodsInfo => {
     const infoSection = document.getElementById('food-details');
     infoSection.innerHTML = '';
+    document.getElementById("food-container").innerHTML = '';
     const detailsInfoDiv = document.createElement("div");
     detailsInfoDiv.className = "show-details";
     const foodDetailsInfo = `
