@@ -11,6 +11,7 @@ const searchFood = () => {
 const showFoods = (foods) => {
     const foodSection = document.getElementById("food-container");
     foodSection.innerHTML = '';
+    document.getElementById('error-text').innerHTML = '';
     foods.forEach(food => {
         const foodDiv = document.createElement("div");
         foodDiv.className = "food-item col-4 food-content";
@@ -27,8 +28,8 @@ const showFoods = (foods) => {
 const showDetails = (foodDetails) => {
     const detailsUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${foodDetails}`
     fetch(detailsUrl)
-    .then(response => response.json())
-    .then(data => displayFoodInfo(data.meals[0]))
+        .then(response => response.json())
+        .then(data => displayFoodInfo(data.meals[0]))
 }
 
 const displayFoodInfo = foodsInfo => {
@@ -52,12 +53,10 @@ const displayFoodInfo = foodsInfo => {
 
 const errorResult = (error) => {
     const displayError = document.getElementById('error-text');
-    const errorInfo = `
-    <div class="alert alert-danger">
-        <b>${error}</b>
-    </div>
-    `;
-    displayError.innerHTML = errorInfo;
-       
+    displayError.innerHTML = '';
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "alert alert-warning";
+    errorDiv.innerText = error;
+    displayError.appendChild(errorDiv);
 }
 
