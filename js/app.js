@@ -54,6 +54,7 @@ const displayFoodInfo = foodsInfo => {
 const errorResult = (error) => {
     const displayError = document.getElementById('error-text');
     displayError.innerHTML = '';
+    document.getElementById('food-details').innerHTML = '';
     const errorDiv = document.createElement("div");
     errorDiv.className = "alert alert-warning";
     errorDiv.innerText = error;
