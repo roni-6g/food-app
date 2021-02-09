@@ -53,6 +53,7 @@ const displayFoodInfo = foodsInfo => {
     infoSection.appendChild(detailsInfoDiv);
 }
 
+//Shwoing Eroor Result
 const errorResult = (error) => {
     const displayError = document.getElementById('error-text');
     displayError.innerHTML = '';
